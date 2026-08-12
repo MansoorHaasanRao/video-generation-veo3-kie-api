@@ -1,0 +1,739 @@
+{
+  "name": "video genration using veo3 from kei.api",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Title",
+        "formDescription": "Title of the story?",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "title"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -288,
+        -80
+      ],
+      "id": "41bf509b-f354-44ad-be8d-b14d044812ed",
+      "name": "On form submission",
+      "webhookId": "265a13cd-03fd-44ab-84dd-21e9e7628f73"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        96
+      ],
+      "id": "fcb1ad4b-aeda-4139-93ad-9413a57e97ec",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rKd8H3OMDSRcwLY8",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        256,
+        96
+      ],
+      "id": "7f14346a-03ac-406c-bc71-42b786902975",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "rKd8H3OMDSRcwLY8",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"part1\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"part2\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        144
+      ],
+      "id": "811e350c-5deb-45bc-9b08-1021fc1899ab",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"prompt1\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"prompt2\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        128
+      ],
+      "id": "6fe3cb6d-ad24-4e5a-b785-cc3634b595f4",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "amount": 140
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        944,
+        -208
+      ],
+      "id": "1e763a6b-cd09-4ee5-8760-62d048979b5a",
+      "name": "Wait",
+      "webhookId": "46b9f694-960b-4372-b771-83ce0b90418e"
+    },
+    {
+      "parameters": {
+        "name": "part1",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "155pZR4hHdWLwTT6NhiRSjuAYgmlSeHff",
+          "mode": "list",
+          "cachedResultName": "video-genration",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/155pZR4hHdWLwTT6NhiRSjuAYgmlSeHff"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1856,
+        -224
+      ],
+      "id": "87fb0965-ab9d-43c2-ab61-a958919c178d",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "dXJ063egG5m0Ho7d",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 140
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        944,
+        112
+      ],
+      "id": "474734ce-3617-41a8-9be8-bf66214b490d",
+      "name": "Wait1",
+      "webhookId": "46b9f694-960b-4372-b771-83ce0b90418e"
+    },
+    {
+      "parameters": {
+        "name": "part2",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "155pZR4hHdWLwTT6NhiRSjuAYgmlSeHff",
+          "mode": "list",
+          "cachedResultName": "video-genration",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/155pZR4hHdWLwTT6NhiRSjuAYgmlSeHff"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1840,
+        96
+      ],
+      "id": "66429b31-4393-42d3-88a4-d84381a3a7f4",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "dXJ063egG5m0Ho7d",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a9094fcd-1be1-4238-9b05-86fa5c6230c2",
+              "leftValue": "={{ $json.data.successFlag }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1392,
+        -208
+      ],
+      "id": "dc84b752-af76-4251-8f0c-512e2d9e676b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a9094fcd-1be1-4238-9b05-86fa5c6230c2",
+              "leftValue": "={{ $json.data.successFlag }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1376,
+        112
+      ],
+      "id": "a828399f-507b-4e60-94a7-a649b6f89aa2",
+      "name": "If1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2064,
+        -224
+      ],
+      "id": "03a817da-beaf-4657-975e-2fb3d1920a9e",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        96
+      ],
+      "id": "415db0d1-a3b6-4563-83dd-18b2a75e08b8",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data.response.resultUrls[0] }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1648,
+        -224
+      ],
+      "id": "847ae71c-3e92-4edb-8a46-426c241c9d28",
+      "name": "covert video into binary form"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data.response.resultUrls[0] }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1632,
+        96
+      ],
+      "id": "4e20c22f-b37c-4ee5-83a6-f4f57bc222ef",
+      "name": "convert video into binary form"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=you are prompt genrator.I will give you the 2 parts of the story. you will genrate a two prompt of the story. These prompt use for video genration and each part prompt cover 8 second.\nYou are a cinematic video prompt generator.\n\nI will give you 2 parts of a story.\nGenerate 2 detailed video prompts (one for each part).\n\nEach prompt must:\n- Represent ~8 seconds of video\n- Include cinematic details (camera movement, lighting, mood, environment)\n- Maintain character and scene consistency\nStory:\npart 1:{{ $json.output.part1 }}\npart 2:{{ $json.output.part2 }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        256,
+        -80
+      ],
+      "id": "7b2ab737-4cef-4763-ace0-9cb9dc469ac6",
+      "name": "prompt genrator"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=you are a proffesional story creater. i will give you the title you will create a 2 parts of the story that connect each other \nStory Title:\nThe format will be:{{ $json.title }}\n\nPart 1\n\nStrong opening that introduces the characters and setting.\nBuilds suspense and emotion.\nEnds with a dramatic cliffhanger.\nDesigned around part 1 (a cinematic scene that captures the key moment).\n\nPart 2\n\nBegins immediately after the cliffhanger.\nReveals the truth or resolves the conflict.\nEnds with a memorable conclusion.\nDesigned around part (the story's climax or final emotional moment).",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -80,
+        -80
+      ],
+      "id": "65fc3f3f-b7ea-463d-aafd-27db3b6df7db",
+      "name": "story genrator"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/veo/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_KIEAI_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": \"{{ $json.output.prompt2 }}\",\n  \"model\": \"veo3_fast\",\n  \"aspect_ratio\": \"16:9\",\n  \"enableTranslation\": true,\n  \"generationType\": \"TEXT_2_VIDEO\"\n}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        736,
+        112
+      ],
+      "id": "bd825a6b-7bb2-44fe-a22e-a79dbdf7826e",
+      "name": "post request2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/veo/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_KIEAI_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": \"{{ $json.output.prompt1 }}\",\n  \"model\": \"veo3_fast\",\n  \"aspect_ratio\": \"16:9\",\n  \"enableTranslation\": true,\n  \"generationType\": \"TEXT_2_VIDEO\"\n} ",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        736,
+        -208
+      ],
+      "id": "221e87b2-4b1a-40fb-be15-2340ed8e1c83",
+      "name": "post request1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/veo/record-info",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_KIEAI_API_KEY_HERE"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1152,
+        -208
+      ],
+      "id": "fcf1378e-9b71-49e4-86a0-2b779f09e3d9",
+      "name": "get video2"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/veo/record-info",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_KIEAI_API_KEY_HERE"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1152,
+        112
+      ],
+      "id": "da854680-74ff-40fd-b533-cf5d59f0a668",
+      "name": "get video"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "story genrator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "story genrator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "prompt genrator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "story genrator",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "prompt genrator",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "get video2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "get video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "covert video into binary form",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "convert video into binary form",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file1": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "covert video into binary form": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "convert video into binary form": {
+      "main": [
+        [
+          {
+            "node": "Upload file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "prompt genrator": {
+      "main": [
+        [
+          {
+            "node": "post request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "post request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "story genrator": {
+      "main": [
+        [
+          {
+            "node": "prompt genrator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "post request2": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "post request1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get video2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get video": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "08544671-9705-4b46-a5b0-5c84762bb45b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6d0be91e84872e4ac0d7dc132e8d59f82eb7e88e8d78dc20aa4b3f489308aff2"
+  },
+  "nodeGroups": [],
+  "id": "mWiq2uqgtQFNdHh7",
+  "tags": []
+}
